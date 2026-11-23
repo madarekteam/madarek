@@ -828,9 +828,29 @@ footer .wrap {
 </footer>
 
 <script>
+
 const courseFormBox = document.getElementById("courseFormBox");
 const openCourseForm = document.getElementById("openCourseForm");
 const courseRegisterButton = document.getElementById("courseRegisterButton");
+
+// الاتصال بخادم Cloudflare
+async function apiCall(action, payload = {}) {
+  const response = await fetch("/api", {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json"
+    },
+    body: JSON.stringify({ action, payload })
+  });
+
+  const data = await response.json();
+
+  if (!response.ok || !data.ok) {
+    throw new Error(data.message || "تعذر الاتصال بالخادم");
+  }
+
+  return data.result;
+}
 
 function showCourseForm() {
   courseFormBox.style.display = "block";
@@ -850,9 +870,11 @@ courseRegisterButton.addEventListener("click", function(e) {
 });
 
 /* تحميل بيانات الدورة */
-google.script.run
-  .withSuccessHandler(function(result) {
-    if (!result || !result.course) return;
+apiCall("getSiteData")
+  .then(function(result) {
+    if (!result || !result.course) {
+      throw new Error("بيانات الدورة غير متوفرة");
+    }
 
     const course = result.course;
 
@@ -869,13 +891,13 @@ google.script.run
       openCourseForm.textContent = "التسجيل غير متاح حاليًا";
     }
   })
-  .withFailureHandler(function() {
-    document.getElementById("courseTitle").textContent = "تعذر تحميل بيانات الدورة";
-  })
-  .getSiteData();
+  .catch(function() {
+    document.getElementById("courseTitle").textContent =
+      "تعذر تحميل بيانات الدورة";
+  });
 
 /* إرسال تسجيل الدورة */
-document.getElementById("madarekForm").addEventListener("submit", function(e) {
+document.getElementById("madarekForm").addEventListener("submit", async function(e) {
   e.preventDefault();
 
   const form = this;
@@ -895,25 +917,23 @@ document.getElementById("madarekForm").addEventListener("submit", function(e) {
   button.disabled = true;
   button.textContent = "جارٍ التسجيل...";
 
-  google.script.run
-    .withSuccessHandler(function(result) {
-      status.textContent = result.message;
+  try {
+    const result = await apiCall("registerStudent", payload);
 
-      if (result.ok) form.reset();
+    status.textContent = result.message;
 
-      button.disabled = false;
-      button.textContent = "تأكيد التسجيل ←";
-    })
-    .withFailureHandler(function() {
-      status.textContent = "حدث خطأ أثناء التسجيل. حاول مرة أخرى.";
-      button.disabled = false;
-      button.textContent = "تأكيد التسجيل ←";
-    })
-    .registerStudent(payload);
+    if (result.ok) form.reset();
+
+  } catch (error) {
+    status.textContent = "حدث خطأ أثناء التسجيل. حاول مرة أخرى.";
+  } finally {
+    button.disabled = false;
+    button.textContent = "تأكيد التسجيل ←";
+  }
 });
 
 /* إرسال الاقتراح */
-document.getElementById("suggestionForm").addEventListener("submit", function(e) {
+document.getElementById("suggestionForm").addEventListener("submit", async function(e) {
   e.preventDefault();
 
   const form = this;
@@ -931,22 +951,21 @@ document.getElementById("suggestionForm").addEventListener("submit", function(e)
   button.disabled = true;
   button.textContent = "جارٍ إرسال الاقتراح...";
 
-  google.script.run
-    .withSuccessHandler(function(result) {
-      status.textContent = result.message;
+  try {
+    const result = await apiCall("submitSuggestion", payload);
 
-      if (result.ok) form.reset();
+    status.textContent = result.message;
 
-      button.disabled = false;
-      button.textContent = "إرسال الاقتراح ←";
-    })
-    .withFailureHandler(function() {
-      status.textContent = "حدث خطأ أثناء الإرسال. حاول مرة أخرى.";
-      button.disabled = false;
-      button.textContent = "إرسال الاقتراح ←";
-    })
-    .submitSuggestion(payload);
+    if (result.ok) form.reset();
+
+  } catch (error) {
+    status.textContent = "حدث خطأ أثناء الإرسال. حاول مرة أخرى.";
+  } finally {
+    button.disabled = false;
+    button.textContent = "إرسال الاقتراح ←";
+  }
 });
+
 </script>
 </body>
 </html>
