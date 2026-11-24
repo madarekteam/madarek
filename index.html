@@ -756,6 +756,13 @@ nav a:hover,
   font-size: .9rem;
   margin-top: 5px;
 }
+.field-hint {
+  display: block;
+  color: #777;
+  font-size: .75rem;
+  margin-top: -8px;
+  line-height: 1.7;
+}
 
 .form-panel input[type="text"],
 .form-panel select,
@@ -1372,8 +1379,11 @@ footer .wrap {
               <option>الثالث الثانوي</option>
             </select>
 
-            <label>الفصل والشعبة</label>
-            <input name="classSection" type="text" maxlength="30" required>
+           <label>الفصل والشعبة</label>
+<input name="classSection" type="text" maxlength="30" required>
+<small class="field-hint">
+  يرجى إدخال رقم الفصل باستخدام الأرقام وليس الحروف.
+</small>
 
             <label>
               <input type="checkbox" name="schoolConfirmation" required>
