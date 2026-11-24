@@ -743,8 +743,19 @@ footer .wrap {
         <div class="event-meta">
           <span id="courseDate">◷ الموعد: يعلن لاحقًا</span>
           <span id="courseLocation">⌖ المكان: يعلن لاحقًا</span>
-          <div id="registrationCount" style="margin-top: 18px; font-size: 14px; color: #174de8; font-weight: 600;">
-  جاري تحميل المقاعد...
+         <div id="registrationCounter" style="margin-top: 22px; padding: 16px; background: #ffffff; border: 1px solid #e5e2da; border-radius: 12px;">
+
+  <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px; gap: 10px;">
+    <span style="font-size: 14px; font-weight: 600;">حجوزات اللقاء</span>
+    <span id="registrationCount" style="font-size: 13px; color: #174de8; font-weight: 600;">
+      جاري تحميل المقاعد...
+    </span>
+  </div>
+
+  <div style="height: 7px; background: #eeeae2; border-radius: 20px; overflow: hidden;">
+    <div id="registrationProgress" style="height: 100%; width: 0%; background: #174de8; border-radius: 20px; transition: width .4s ease;"></div>
+  </div>
+
 </div>
         </div>
       </div>
@@ -891,9 +902,10 @@ apiCall("getSiteData")
     const registration = result.registration;
 
 document.getElementById("registrationCount").textContent =
-  "المقاعد المحجوزة: " + registration.registered +
-  " من " + registration.capacity +
-  " | المقاعد المتبقية: " + registration.remaining;
+  registration.registered + " / " + registration.capacity + " مقعد";
+
+document.getElementById("registrationProgress").style.width =
+  (registration.registered / registration.capacity * 100) + "%";
 
     if (course.active !== true) {
       courseRegisterButton.textContent = "التسجيل غير متاح حاليًا";
@@ -941,9 +953,10 @@ document.getElementById("madarekForm").addEventListener("submit", async function
     const registration = updatedData.registration;
 
     document.getElementById("registrationCount").textContent =
-      "المقاعد المحجوزة: " + registration.registered +
-      " من " + registration.capacity +
-      " | المقاعد المتبقية: " + registration.remaining;
+  registration.registered + " / " + registration.capacity + " مقعد";
+
+document.getElementById("registrationProgress").style.width =
+  (registration.registered / registration.capacity * 100) + "%";
   }
 
 } catch (error) {
