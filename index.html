@@ -800,7 +800,7 @@ footer .wrap {
     <div class="section-top">
       <div>
         <div class="overline">03 / WEEKLY SESSIONS</div>
-        <h2>دورات مدارك.</h2>
+        <h2>لقاءات مدارك.</h2>
       </div>
       <p class="section-intro">دورة جديدة كل أسبوع، ومساحة جديدة لاكتشاف المعرفة.</p>
     </div>
@@ -844,7 +844,16 @@ footer .wrap {
     <div class="registration-track">
       <div id="registrationProgress"></div>
     </div>
+<div class="past-events">
+  <div class="past-events-heading">
+    <span class="overline">THE ARCHIVE</span>
+    <h3>لقاءات سابقة.</h3>
+  </div>
 
+  <div id="pastEventsList" class="past-events-list">
+    <p>جاري تحميل اللقاءات السابقة...</p>
+  </div>
+</div>
   </div>
 </div>
 
@@ -996,7 +1005,7 @@ apiCall("getSiteData")
     }
 
     const course = result.course;
-
+    renderPastEvents(result.events);
     document.getElementById("courseTitle").textContent = course.title;
     document.getElementById("courseDescription").textContent = course.description;
     document.getElementById("courseDate").textContent = "◷ الموعد: " + course.date;
@@ -1091,7 +1100,43 @@ document.getElementById("suggestionForm").addEventListener("submit", async funct
     button.textContent = "إرسال الاقتراح ←";
   }
 });
+/* عرض اللقاءات السابقة */
+function renderPastEvents(events) {
+  const container = document.getElementById("pastEventsList");
 
+  const pastEvents = (events || []).filter(function(event) {
+    return event.status === "سابق";
+  });
+
+  if (pastEvents.length === 0) {
+    container.innerHTML = "<p>لا توجد لقاءات سابقة حتى الآن.</p>";
+    return;
+  }
+
+  container.innerHTML = pastEvents.map(function(event) {
+    return `
+      <article class="past-event-card">
+        <div class="overline">${event.date || ""}</div>
+        <h4>${event.title}</h4>
+        <p>${event.description || ""}</p>
+        <button type="button" class="past-event-toggle">
+          تفاصيل اللقاء
+        </button>
+        <p class="past-event-summary" hidden>
+          ${event.summary || "لا يوجد ملخص متاح لهذا اللقاء."}
+        </p>
+      </article>
+    `;
+  }).join("");
+
+  container.querySelectorAll(".past-event-toggle").forEach(function(button) {
+    button.addEventListener("click", function() {
+      const summary = button.nextElementSibling;
+      summary.hidden = !summary.hidden;
+      button.textContent = summary.hidden ? "تفاصيل اللقاء" : "إخفاء التفاصيل";
+    });
+  });
+}
 </script>
 </body>
 </html>
