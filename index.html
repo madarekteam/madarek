@@ -389,6 +389,25 @@ nav a:hover,
 .event-band .overline {
   color: #9db5ff;
 }
+.registration-status {
+  display: inline-flex;
+  align-items: center;
+  padding: 5px 12px;
+  border-radius: 20px;
+  font-size: 11px;
+  font-weight: 600;
+  white-space: nowrap;
+}
+
+.registration-status.open {
+  color: #9de2b2;
+  background: #173d2b;
+}
+
+.registration-status.full {
+  color: #ffb0b0;
+  background: #512727;
+}
 
 .event-band h3 {
   font-size: 2rem;
@@ -791,7 +810,12 @@ footer .wrap {
 <div class="event-band">
   <div class="event-content">
 
-    <div class="overline">UPCOMING SESSION</div>
+    <div style="display: flex; justify-content: space-between; align-items: center; gap: 12px; flex-wrap: wrap;">
+  <div class="overline">UPCOMING SESSION</div>
+  <span id="registrationStatus" class="registration-status open">
+    التسجيل مفتوح
+  </span>
+</div>
 
     <h3 id="courseTitle">جاري تحميل الدورة...</h3>
 
@@ -929,6 +953,24 @@ async function apiCall(action, payload = {}) {
   return data.result;
 }
 
+function updateRegistrationDisplay(registration) {
+  const count = registration.registered;
+  const capacity = registration.capacity;
+  const isFull = count >= capacity;
+
+  document.getElementById("registrationCount").textContent =
+    count + " / " + capacity + " مقعد";
+
+  document.getElementById("registrationProgress").style.width =
+    Math.min(100, (count / capacity) * 100) + "%";
+
+  const status = document.getElementById("registrationStatus");
+
+  status.textContent = isFull ? "اكتمل العدد" : "التسجيل مفتوح";
+  status.className = "registration-status " + (isFull ? "full" : "open");
+}
+
+
 function showCourseForm() {
   courseFormBox.style.display = "block";
   openCourseForm.style.display = "none";
@@ -960,13 +1002,7 @@ apiCall("getSiteData")
     document.getElementById("courseDate").textContent = "◷ الموعد: " + course.date;
     document.getElementById("courseLocation").textContent = "⌖ المكان: " + course.location;
     
-    const registration = result.registration;
-
-document.getElementById("registrationCount").textContent =
-  registration.registered + " / " + registration.capacity + " مقعد";
-
-document.getElementById("registrationProgress").style.width =
-  (registration.registered / registration.capacity * 100) + "%";
+updateRegistrationDisplay(result.registration);
 
     if (course.active !== true) {
       courseRegisterButton.textContent = "التسجيل غير متاح حاليًا";
@@ -1010,14 +1046,8 @@ document.getElementById("madarekForm").addEventListener("submit", async function
   if (result.ok) {
     form.reset();
 
-    const updatedData = await apiCall("getSiteData");
-    const registration = updatedData.registration;
-
-    document.getElementById("registrationCount").textContent =
-  registration.registered + " / " + registration.capacity + " مقعد";
-
-document.getElementById("registrationProgress").style.width =
-  (registration.registered / registration.capacity * 100) + "%";
+const updatedData = await apiCall("getSiteData");
+updateRegistrationDisplay(updatedData.registration);
   }
 
 } catch (error) {
