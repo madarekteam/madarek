@@ -743,6 +743,9 @@ footer .wrap {
         <div class="event-meta">
           <span id="courseDate">◷ الموعد: يعلن لاحقًا</span>
           <span id="courseLocation">⌖ المكان: يعلن لاحقًا</span>
+          <div id="registrationCount" style="margin-top: 18px; font-size: 14px; color: #174de8; font-weight: 600;">
+  جاري تحميل المقاعد...
+</div>
         </div>
       </div>
 
@@ -884,6 +887,13 @@ apiCall("getSiteData")
     document.getElementById("courseDescription").textContent = course.description;
     document.getElementById("courseDate").textContent = "◷ الموعد: " + course.date;
     document.getElementById("courseLocation").textContent = "⌖ المكان: " + course.location;
+    
+    const registration = result.registration;
+
+document.getElementById("registrationCount").textContent =
+  "المقاعد المحجوزة: " + registration.registered +
+  " من " + registration.capacity +
+  " | المقاعد المتبقية: " + registration.remaining;
 
     if (course.active !== true) {
       courseRegisterButton.textContent = "التسجيل غير متاح حاليًا";
