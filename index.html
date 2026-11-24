@@ -930,18 +930,28 @@ document.getElementById("madarekForm").addEventListener("submit", async function
   button.textContent = "جارٍ التسجيل...";
 
   try {
-    const result = await apiCall("registerStudent", payload);
+  const result = await apiCall("registerStudent", payload);
 
-    status.textContent = result.message;
+  status.textContent = result.message;
 
-    if (result.ok) form.reset();
+  if (result.ok) {
+    form.reset();
 
-  } catch (error) {
-    status.textContent = "حدث خطأ أثناء التسجيل. حاول مرة أخرى.";
-  } finally {
-    button.disabled = false;
-    button.textContent = "تأكيد التسجيل ←";
+    const updatedData = await apiCall("getSiteData");
+    const registration = updatedData.registration;
+
+    document.getElementById("registrationCount").textContent =
+      "المقاعد المحجوزة: " + registration.registered +
+      " من " + registration.capacity +
+      " | المقاعد المتبقية: " + registration.remaining;
   }
+
+} catch (error) {
+  status.textContent = "حدث خطأ أثناء التسجيل. حاول مرة أخرى.";
+} finally {
+  button.disabled = false;
+  button.textContent = "تأكيد التسجيل ←";
+}
 });
 
 /* إرسال الاقتراح */
