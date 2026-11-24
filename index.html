@@ -956,7 +956,7 @@ async function apiCall(action, payload = {}) {
 function updateRegistrationDisplay(registration) {
   const count = registration.registered;
   const capacity = registration.capacity;
-  const isFull = true;
+  const isFull = count >= capacity;
 
   document.getElementById("registrationCount").textContent =
     count + " / " + capacity + " مقعد";
