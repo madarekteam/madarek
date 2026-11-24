@@ -460,6 +460,244 @@ nav a:hover,
   flex-shrink: 0;
 }
 
+/* MADAREK — CHEMISTRY EVENT DESIGN */
+
+.event-band {
+  position: relative;
+  overflow: hidden;
+  background: #17191c;
+  color: #fff;
+  padding: 42px;
+  border-radius: 4px;
+}
+
+.event-content {
+  position: relative;
+  z-index: 1;
+}
+
+.chemistry-event {
+  display: grid;
+  grid-template-columns: 1fr 0.88fr;
+  gap: 38px;
+  align-items: center;
+}
+
+.chemistry-copy {
+  padding: 10px 0;
+}
+
+.chemistry-series {
+  color: #8da8ff;
+  font-size: 0.85rem;
+  font-weight: 600;
+  margin-bottom: 14px;
+}
+
+.chemistry-title {
+  margin: 0;
+  line-height: 1.25;
+}
+
+.chemistry-title small {
+  display: block;
+  color: #8da8ff;
+  font-size: clamp(1rem, 2vw, 1.35rem);
+  font-weight: 500;
+  margin-bottom: 5px;
+}
+
+.chemistry-title strong {
+  display: block;
+  font-size: clamp(3rem, 6vw, 5rem);
+  font-weight: 700;
+  letter-spacing: -2px;
+}
+
+.chemistry-hook {
+  margin-top: 28px;
+  font-size: 1.05rem;
+  color: #fff;
+  font-weight: 600;
+}
+
+.chemistry-description {
+  max-width: 430px;
+  color: #bfc0c3;
+  line-height: 2;
+  font-size: 0.9rem;
+  margin-top: 8px;
+}
+
+.chemistry-visual {
+  background: #f3f0e8;
+  color: #17191c;
+  padding: 24px;
+  min-height: 300px;
+  position: relative;
+  overflow: hidden;
+}
+
+.chemistry-visual-top {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+}
+
+.chemistry-logo {
+  width: 35px;
+  height: 35px;
+  display: grid;
+  place-items: center;
+  background: #174de8;
+  color: white;
+  font-size: 19px;
+  font-weight: 700;
+}
+
+.chemistry-code {
+  font-family: Arial, sans-serif;
+  direction: ltr;
+  font-size: 0.65rem;
+  letter-spacing: 1.5px;
+  color: #65676a;
+}
+
+.chemistry-atom {
+  display: block;
+  width: 78%;
+  max-width: 300px;
+  margin: 18px auto 4px;
+}
+
+.chemistry-atom ellipse {
+  fill: none;
+  stroke: #17191c;
+  stroke-width: 1.8;
+}
+
+.chemistry-atom circle {
+  fill: #174de8;
+}
+
+.chemistry-visual-caption {
+  text-align: center;
+  font-weight: 700;
+  font-size: 0.95rem;
+  margin-top: 4px;
+}
+
+.chemistry-bottom-art {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 10px;
+  margin-top: 22px;
+  padding-top: 15px;
+  border-top: 1px solid #d7d3ca;
+}
+
+.chemistry-question {
+  text-align: center;
+  font-weight: 700;
+  font-size: 0.9rem;
+}
+
+.chemistry-question small {
+  display: block;
+  color: #65676a;
+  font-size: 0.68rem;
+  font-weight: 400;
+  margin-top: 4px;
+}
+
+.chemistry-glass {
+  width: 55px;
+  height: 65px;
+  flex-shrink: 0;
+}
+
+.chemistry-glass path,
+.chemistry-glass line {
+  fill: none;
+  stroke: #174de8;
+  stroke-width: 2.5;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+.chemistry-glass .liquid {
+  fill: #174de8;
+  stroke: none;
+  opacity: 0.2;
+}
+
+.chemistry-meta {
+  display: flex;
+  gap: 22px;
+  flex-wrap: wrap;
+  margin-top: 25px;
+  color: #c3c3c3;
+  font-size: 0.83rem;
+}
+
+.chemistry-meta span {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+}
+
+.chemistry-event .event-bottom {
+  margin-top: 28px;
+}
+
+.chemistry-event .registration-track {
+  margin-top: 20px;
+}
+
+/* Responsive */
+@media (max-width: 800px) {
+  .chemistry-event {
+    grid-template-columns: 1fr;
+    gap: 28px;
+  }
+
+  .chemistry-visual {
+    min-height: 280px;
+  }
+
+  .chemistry-atom {
+    max-width: 260px;
+  }
+
+  .chemistry-title strong {
+    font-size: clamp(2.8rem, 12vw, 4.3rem);
+  }
+}
+
+@media (max-width: 600px) {
+  .chemistry-visual {
+    padding: 18px;
+  }
+
+  .chemistry-bottom-art {
+    gap: 5px;
+  }
+
+  .chemistry-glass {
+    width: 43px;
+  }
+
+  .chemistry-question {
+    font-size: 0.82rem;
+  }
+
+  .chemistry-question small {
+    font-size: 0.62rem;
+  }
+}
+
 .registration-track {
   height: 5px;
   background: #414348;
@@ -993,46 +1231,109 @@ footer .wrap {
 
    
 
+
 <div class="event-band">
-  <div class="event-content">
+  <div class="event-content chemistry-event">
 
-    <div style="display: flex; justify-content: space-between; align-items: center; gap: 12px; flex-wrap: wrap;">
-  <div class="overline">UPCOMING SESSION</div>
-  <span id="registrationStatus" class="registration-status open">
-    التسجيل مفتوح
-  </span>
-</div>
+    <div class="chemistry-copy">
 
-    <h3 id="courseTitle">جاري تحميل الدورة...</h3>
-
-    <p id="courseDescription">
-      اكتشف دورتنا الأسبوعية القادمة.
-    </p>
-
-    <div class="event-meta">
-      <span id="courseDate">◷ الموعد: يعلن لاحقًا</span>
-      <span id="courseLocation">⌖ المكان: يعلن لاحقًا</span>
-    </div>
-
-    <div class="event-bottom">
-
-      <div class="registration-info">
-        <span class="registration-label">المقاعد المحجوزة</span>
-        <span id="registrationCount">جاري تحميل المقاعد...</span>
+      <div style="display:flex; justify-content:space-between; align-items:center; gap:12px; flex-wrap:wrap;">
+        <div class="chemistry-series">كل شيء تحتاج تعرفه عن...</div>
+        <span id="registrationStatus" class="registration-status open">
+          التسجيل مفتوح
+        </span>
       </div>
 
-      <a class="btn" id="courseRegisterButton" href="#courseRegister">
-        سجّل في الدورة ←
-      </a>
+      <h3 id="courseTitle" class="chemistry-title">
+        <small>كل شيء تحتاج تعرفه عن...</small>
+        <strong>الكيمياء.</strong>
+      </h3>
+
+      <div class="chemistry-hook">
+        ما تحب الكيمياء؟ يمكن هذا اللقاء يغيّر رأيك.
+      </div>
+
+      <p id="courseDescription" class="chemistry-description">
+        اكتشف العلم الذي يفسر أشياء لم تتوقف يومًا عن رؤيتها.
+      </p>
+
+      <div class="chemistry-meta">
+        <span id="courseDate">◷ الموعد: يعلن لاحقًا</span>
+        <span id="courseLocation">⌖ المكان: قاعة القدرات والتحصيلي</span>
+      </div>
 
     </div>
 
-    <div class="registration-track">
-      <div id="registrationProgress"></div>
+    <div class="chemistry-visual">
+
+      <div class="chemistry-visual-top">
+        <div class="chemistry-logo">م</div>
+        <div class="chemistry-code">CHEMISTRY / 01</div>
+      </div>
+
+      <svg class="chemistry-atom" viewBox="0 0 300 190" role="img" aria-label="رسم ذرة">
+        <ellipse cx="150" cy="95" rx="125" ry="45" transform="rotate(32 150 95)"/>
+        <ellipse cx="150" cy="95" rx="125" ry="45" transform="rotate(-32 150 95)"/>
+        <ellipse cx="150" cy="95" rx="125" ry="45" transform="rotate(90 150 95)"/>
+
+        <circle cx="150" cy="95" r="13"/>
+        <circle cx="50" cy="62" r="7"/>
+        <circle cx="244" cy="130" r="7"/>
+        <circle cx="150" cy="15" r="7"/>
+      </svg>
+
+      <div class="chemistry-visual-caption">
+        كل شيء حولك يبدأ من هنا.
+      </div>
+
+      <div class="chemistry-bottom-art">
+
+        <svg class="chemistry-glass" viewBox="0 0 60 70" aria-hidden="true">
+          <path class="liquid" d="M20 35 L11 58 Q9 64 18 65 L43 65 Q51 64 48 57 L39 35 Z"/>
+          <path d="M24 7 H36 M27 7 V34 L12 58 Q8 66 19 66 H42 Q52 66 47 58 L33 34 V7"/>
+          <line x1="18" y1="49" x2="43" y2="49"/>
+        </svg>
+
+        <div class="chemistry-question">
+          هل المادة كما تبدو؟
+          <small>وراء أبسط الأشياء عالم لا تراه.</small>
+        </div>
+
+        <svg class="chemistry-glass" viewBox="0 0 60 70" aria-hidden="true">
+          <path class="liquid" d="M10 35 H25 V57 Q25 65 30 65 Q35 65 35 57 V35 H50 V60 Q50 66 45 66 H15 Q10 66 10 60 Z"/>
+          <path d="M10 14 H25 V60 Q25 66 20 66 H15 Q10 66 10 60 Z M35 14 H50 V60 Q50 66 45 66 H40 Q35 66 35 60 Z"/>
+          <line x1="10" y1="14" x2="25" y2="14"/>
+          <line x1="35" y1="14" x2="50" y2="14"/>
+        </svg>
+
+      </div>
+
+    </div>
+
+    <div style="grid-column:1/-1;">
+
+      <div class="event-bottom">
+
+        <div class="registration-info">
+          <span class="registration-label">المقاعد المحجوزة</span>
+          <span id="registrationCount">جاري تحميل المقاعد...</span>
+        </div>
+
+        <a class="btn" id="courseRegisterButton" href="#courseRegister">
+          احجز مقعدك الآن ←
+        </a>
+
+      </div>
+
+      <div class="registration-track">
+        <div id="registrationProgress"></div>
+      </div>
+
     </div>
 
   </div>
 </div>
+
 
 
   </div>
@@ -1200,7 +1501,16 @@ apiCall("getSiteData")
 
     const course = result.course;
     renderPastEvents(result.events);
-    document.getElementById("courseTitle").textContent = course.title;
+    const courseTitleElement = document.getElementById("courseTitle");
+
+if (course.title === "كل شيء تحتاج تعرفه عن الكيمياء") {
+  courseTitleElement.innerHTML = `
+    <small>كل شيء تحتاج تعرفه عن...</small>
+    <strong>الكيمياء.</strong>
+  `;
+} else {
+  courseTitleElement.textContent = course.title;
+}
     document.getElementById("courseDescription").textContent = course.description;
     document.getElementById("courseDate").textContent = "◷ الموعد: " + course.date;
     document.getElementById("courseLocation").textContent = "⌖ المكان: " + course.location;
