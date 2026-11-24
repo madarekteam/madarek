@@ -2353,14 +2353,22 @@ document.getElementById("madarekForm").addEventListener("submit", async function
   status.textContent = result.message;
 
     if (result.ok) {
-    form.reset();
+  // إظهار التذكرة فور استلام نتيجة التسجيل
+  if (result.ticket) {
+    showTicket(result.ticket);
+  }
 
+  // تفريغ النموذج
+  form.reset();
+
+  // تحديث عدد المسجلين في الخلفية
+  try {
     const updatedData = await apiCall("getSiteData");
     updateRegistrationDisplay(updatedData.registration);
-
-    if (result.ticket) {
-      showTicket(result.ticket);
-    } else {
+  } catch (error) {
+    console.error("Registration display update failed:", error);
+  }
+} else {
       status.textContent =
         "تم تسجيلك بنجاح، لكن تعذر تحميل التذكرة. يرجى التواصل مع فريق مدارك.";
     }
