@@ -1575,19 +1575,30 @@ footer .wrap {
 }
 
 /* =========================
-   MADAREK TICKET FINAL FIX
+   MADAREK TICKET WIDTH FIX
 ========================= */
 
-/* توزيع التذكرة على ثلاثة أعمدة */
 .ticket-main {
-  grid-template-columns: 155px minmax(0, 1fr) 145px;
-  gap: 22px;
+  grid-template-columns: minmax(0, 1fr) 155px 145px;
+  gap: 20px;
   align-items: stretch;
 }
 
-/* التفاصيل في الجانب الأيمن */
+/* مساحة النصوص */
 .ticket-details {
   grid-column: 1;
+  min-width: 0;
+  grid-template-columns: 1fr 1fr;
+  gap: 20px 25px;
+}
+
+/* السماح للكلمات بالظهور كاملة */
+.ticket-details > div {
+  min-width: 0;
+}
+
+.ticket-detail-value {
+  overflow-wrap: anywhere;
 }
 
 /* المقعد في المنتصف */
@@ -1596,7 +1607,7 @@ footer .wrap {
   grid-row: 1;
   min-height: 125px;
   width: 100%;
-  max-width: 180px;
+  max-width: 155px;
   justify-self: center;
   align-self: center;
 }
@@ -1609,12 +1620,11 @@ footer .wrap {
   font-size: 46px;
 }
 
-/* QR في الجانب الأيسر */
+/* رمز QR في الطرف الأيسر */
 .ticket-qr-area {
   grid-column: 3;
   grid-row: 1;
-  border-right: 1px solid #d7d3ca;
-  padding-right: 18px;
+  padding-right: 15px;
   justify-content: center;
   align-self: stretch;
 }
@@ -1629,11 +1639,9 @@ footer .wrap {
 .ticket-qr-box canvas {
   width: 112px !important;
   height: 112px !important;
-  max-width: 100%;
-  max-height: 100%;
 }
 
-/* تكبير حالة التذكرة */
+/* حالة التذكرة */
 .ticket-status {
   font-size: 13px;
   padding: 7px 15px;
@@ -1641,55 +1649,62 @@ footer .wrap {
   border-radius: 25px;
 }
 
-/* تكبير اسم اللقاء والوصف */
+/* عنوان اللقاء */
 .ticket-event-name {
   font-size: 27px;
 }
 
 .ticket-event-name + .ticket-detail-label {
-  font-size: 12px;
-  margin-top: 3px;
+  font-size: 13px;
+  margin-top: 4px;
 }
 
-/* ضبط التوزيع على الجوال */
+/* الجوال */
 @media (max-width: 650px) {
   .ticket-main {
-    grid-template-columns: 95px minmax(0, 1fr) 100px;
-    gap: 10px;
-    padding: 17px 12px;
+    grid-template-columns: minmax(0, 1fr) 105px 95px;
+    gap: 8px;
+    padding: 17px 10px;
+  }
+
+  .ticket-details {
+    gap: 15px 8px;
+  }
+
+  .ticket-detail-value {
+    font-size: 12px;
+  }
+
+  .ticket-event-name {
+    font-size: 19px;
   }
 
   .ticket-seat {
-    min-height: 110px;
-    width: 100%;
+    min-height: 100px;
   }
 
   .ticket-seat strong {
-    font-size: 34px;
+    font-size: 32px;
   }
 
   .ticket-qr-area {
-    padding-right: 8px;
+    padding-right: 6px;
   }
 
   .ticket-qr-box {
-    width: 90px;
-    height: 90px;
+    width: 85px;
+    height: 85px;
   }
 
   .ticket-qr-box img,
   .ticket-qr-box canvas {
-    width: 80px !important;
-    height: 80px !important;
-  }
-
-  .ticket-event-name {
-    font-size: 21px;
+    width: 75px !important;
+    height: 75px !important;
   }
 
   .ticket-status {
-    font-size: 11px;
-    padding: 6px 9px;
+    font-size: 10px;
+    padding: 5px 8px;
   }
 }
 
