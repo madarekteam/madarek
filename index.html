@@ -743,14 +743,20 @@ footer .wrap {
         <div class="event-meta">
           <span id="courseDate">◷ الموعد: يعلن لاحقًا</span>
           <span id="courseLocation">⌖ المكان: يعلن لاحقًا</span>
-         <div id="registrationCounter" style="margin-top: 22px; padding: 16px; background: #ffffff; border: 1px solid #e5e2da; border-radius: 12px;">
+         <div id="registrationCounter" style="margin-top: 28px; padding: 24px; background: #ffffff; border: 1px solid #e5e2da; border-radius: 14px; width: 100%; box-sizing: border-box;">
 
-  <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px; gap: 10px;">
-    <span style="font-size: 14px; font-weight: 600;">حجوزات اللقاء</span>
-    <span id="registrationCount" style="font-size: 13px; color: #174de8; font-weight: 600;">
+  <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 18px; gap: 10px;">
+    <span style="font-size: 16px; font-weight: 600;">حجوزات اللقاء</span>
+    <span id="registrationCount" style="font-size: 15px; color: #174de8; font-weight: 700;">
       جاري تحميل المقاعد...
     </span>
   </div>
+
+  <div style="height: 12px; background: #eeeae2; border-radius: 20px; overflow: hidden;">
+    <div id="registrationProgress" style="height: 100%; width: 0%; background: #174de8; border-radius: 20px; transition: width .4s ease;"></div>
+  </div>
+
+</div>
 
   <div style="height: 7px; background: #eeeae2; border-radius: 20px; overflow: hidden;">
     <div id="registrationProgress" style="height: 100%; width: 0%; background: #174de8; border-radius: 20px; transition: width .4s ease;"></div>
