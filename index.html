@@ -702,18 +702,71 @@ footer .wrap {
   }
 
 }
-/* Past Events Archive */
-.past-events {
-  margin-top: 70px;
+/* Archive Button */
+.archive-open-btn {
+  margin-top: 18px;
+  padding: 10px 18px;
+  background: transparent;
+  border: 1px solid #174de8;
+  color: #174de8;
+  font: inherit;
+  font-size: 14px;
+  cursor: pointer;
+  transition: .2s;
 }
 
-.past-events-heading {
-  margin-bottom: 25px;
+.archive-open-btn:hover {
+  background: #174de8;
+  color: white;
 }
 
-.past-events-heading h3 {
-  font-size: 28px;
-  margin-top: 10px;
+/* Archive Modal */
+.archive-modal {
+  display: none;
+  position: fixed;
+  inset: 0;
+  z-index: 9999;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+}
+
+.archive-modal.is-open {
+  display: flex;
+}
+
+.archive-modal-backdrop {
+  position: absolute;
+  inset: 0;
+  background: rgba(0, 0, 0, .65);
+}
+
+.archive-modal-content {
+  position: relative;
+  z-index: 1;
+  width: 100%;
+  max-width: 900px;
+  max-height: 85vh;
+  overflow-y: auto;
+  background: #f3f0e8;
+  padding: 45px;
+  border-radius: 4px;
+}
+
+.archive-modal-content h3 {
+  font-size: 30px;
+  margin: 12px 0 30px;
+}
+
+.archive-close {
+  position: absolute;
+  top: 15px;
+  left: 18px;
+  border: 0;
+  background: transparent;
+  font-size: 32px;
+  cursor: pointer;
+  color: #17191c;
 }
 
 .past-events-list {
@@ -753,6 +806,16 @@ footer .wrap {
   margin-top: 15px;
   padding-top: 15px;
   border-top: 1px solid #eee;
+}
+
+@media (max-width: 600px) {
+  .archive-modal-content {
+    padding: 35px 20px;
+  }
+
+  .archive-modal-content h3 {
+    font-size: 24px;
+  }
 }
 </style>
 <link rel="icon" type="image/svg+xml" href="/favicon.svg">
@@ -853,7 +916,13 @@ footer .wrap {
         <div class="overline">03 / WEEKLY SESSIONS</div>
         <h2>لقاءات مدارك.</h2>
       </div>
-      <p class="section-intro">دورة جديدة كل أسبوع، ومساحة جديدة لاكتشاف المعرفة.</p>
+      <div>
+  <p class="section-intro">دورة جديدة كل أسبوع، ومساحة جديدة لاكتشاف المعرفة.</p>
+
+  <button class="archive-open-btn" id="openArchive" type="button">
+    أرشيف اللقاءات ←
+  </button>
+</div>
     </div>
 
    
@@ -895,16 +964,7 @@ footer .wrap {
     <div class="registration-track">
       <div id="registrationProgress"></div>
     </div>
-<div class="past-events">
-  <div class="past-events-heading">
-    <span class="overline">THE ARCHIVE</span>
-    <h3>لقاءات سابقة.</h3>
-  </div>
 
-  <div id="pastEventsList" class="past-events-list">
-    <p>جاري تحميل اللقاءات السابقة...</p>
-  </div>
-</div>
   </div>
 </div>
 
@@ -976,7 +1036,24 @@ footer .wrap {
           <p class="form-status" id="suggestionStatus" aria-live="polite"></p>
         </form>
       </div>
+       </div>
+
+    <!-- نافذة أرشيف اللقاءات -->
+    <div class="archive-modal" id="archiveModal" aria-hidden="true">
+      <div class="archive-modal-backdrop" data-close-archive></div>
+
+      <div class="archive-modal-content" role="dialog" aria-modal="true" aria-labelledby="archiveTitle">
+        <button type="button" class="archive-close" id="closeArchive" aria-label="إغلاق">×</button>
+
+        <div class="overline">THE ARCHIVE</div>
+        <h3 id="archiveTitle">أرشيف لقاءات مدارك.</h3>
+
+        <div id="pastEventsList" class="past-events-list">
+          <p>جاري تحميل اللقاءات السابقة...</p>
+        </div>
+      </div>
     </div>
+
   </div>
 </section>
 </main>
@@ -1158,7 +1235,33 @@ function renderPastEvents(events) {
   const pastEvents = (events || []).filter(function(event) {
     return event.status === "سابق";
   });
+/* التحكم في نافذة الأرشيف */
+const archiveModal = document.getElementById("archiveModal");
+const openArchive = document.getElementById("openArchive");
+const closeArchive = document.getElementById("closeArchive");
 
+function showArchive() {
+  archiveModal.classList.add("is-open");
+  archiveModal.setAttribute("aria-hidden", "false");
+  document.body.style.overflow = "hidden";
+}
+
+function hideArchive() {
+  archiveModal.classList.remove("is-open");
+  archiveModal.setAttribute("aria-hidden", "true");
+  document.body.style.overflow = "";
+}
+
+openArchive.addEventListener("click", showArchive);
+closeArchive.addEventListener("click", hideArchive);
+
+document.querySelector("[data-close-archive]").addEventListener("click", hideArchive);
+
+document.addEventListener("keydown", function(event) {
+  if (event.key === "Escape" && archiveModal.classList.contains("is-open")) {
+    hideArchive();
+  }
+});
   if (pastEvents.length === 0) {
     container.innerHTML = "<p>لا توجد لقاءات سابقة حتى الآن.</p>";
     return;
