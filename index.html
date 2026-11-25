@@ -1708,6 +1708,286 @@ footer .wrap {
   }
 }
 
+
+/* =========================
+   MADAREK SUCCESS SCREEN
+========================= */
+
+.ticket-modal {
+  padding: 0;
+  background: var(--paper);
+  overflow-y: auto;
+  align-items: flex-start;
+  justify-content: center;
+}
+
+.ticket-modal.is-open {
+  display: flex;
+}
+
+.ticket-backdrop {
+  position: fixed;
+  inset: 0;
+  background: var(--paper);
+}
+
+.success-content {
+  position: relative;
+  z-index: 1;
+  width: min(900px, calc(100% - 48px));
+  margin: 0 auto;
+  padding-bottom: 35px;
+  animation: successAppear .55s ease both;
+}
+
+.success-header {
+  min-height: 88px;
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  gap: 0;
+  border-bottom: 0;
+  border: 0;
+  border-bottom: 0;
+}
+
+.success-brand {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  font-size: 1.3rem;
+  color: var(--ink);
+}
+
+.success-brand-mark {
+  width: 42px;
+  height: 42px;
+  display: grid;
+  place-items: center;
+  background: var(--blue);
+  color: white;
+  font-size: 1.5rem;
+  font-weight: 700;
+}
+
+.success-brand strong {
+  font-weight: 700;
+}
+
+.success-divider {
+  height: 2px;
+  width: 100%;
+  background: var(--blue);
+}
+
+.success-message {
+  text-align: center;
+  padding: 55px 15px 43px;
+}
+
+.success-check {
+  width: 82px;
+  height: 82px;
+  margin: 0 auto 23px;
+  border: 2px solid var(--blue);
+  border-radius: 50%;
+  display: grid;
+  place-items: center;
+  animation: checkAppear .65s .15s ease both;
+}
+
+.success-check svg {
+  width: 49px;
+  height: 49px;
+  fill: none;
+  stroke: var(--blue);
+  stroke-width: 3.5;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+.success-message h1 {
+  color: var(--ink);
+  font-size: clamp(2rem, 5vw, 3.2rem);
+  line-height: 1.4;
+  margin: 0 0 8px;
+  font-weight: 700;
+}
+
+.success-message p {
+  color: #55585d;
+  font-size: 1rem;
+  margin: 0;
+  line-height: 1.9;
+}
+
+.success-ticket-section {
+  padding-top: 5px;
+}
+
+.success-ticket-heading {
+  text-align: center;
+  margin-bottom: 25px;
+}
+
+.success-ticket-kicker {
+  color: var(--blue);
+  font-family: Arial, sans-serif;
+  direction: ltr;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 2.5px;
+}
+
+.success-ticket-heading h2 {
+  color: var(--ink);
+  font-size: clamp(1.8rem, 4vw, 2.5rem);
+  margin: 8px 0 3px;
+  line-height: 1.4;
+}
+
+.success-ticket-heading p {
+  color: #55585d;
+  font-size: .9rem;
+  margin: 0;
+}
+
+.success-content .ticket-card {
+  box-shadow: 0 8px 30px rgba(23, 25, 28, .07);
+}
+
+.success-actions {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 13px;
+  margin-top: 25px;
+}
+
+.success-download-btn {
+  width: min(300px, 100%);
+  min-height: 52px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 14px;
+  background: var(--blue);
+  color: white;
+  border: 1px solid var(--blue);
+  font-family: inherit;
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background .2s, transform .2s;
+}
+
+.success-download-btn:hover {
+  background: #103bc0;
+  transform: translateY(-1px);
+}
+
+.success-download-btn:disabled {
+  opacity: .65;
+  cursor: wait;
+  transform: none;
+}
+
+.success-return-btn {
+  background: transparent;
+  border: 0;
+  color: #55585d;
+  font-family: inherit;
+  font-size: .88rem;
+  cursor: pointer;
+  padding: 7px 12px;
+  transition: color .2s;
+}
+
+.success-return-btn:hover {
+  color: var(--blue);
+}
+
+.success-footer {
+  text-align: center;
+  direction: ltr;
+  font-family: Arial, sans-serif;
+  font-size: 9px;
+  letter-spacing: 2px;
+  color: #85847f;
+  margin-top: 38px;
+}
+
+@keyframes successAppear {
+  from {
+    opacity: 0;
+    transform: translateY(9px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes checkAppear {
+  from {
+    opacity: 0;
+    transform: scale(.88);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+@media (max-width: 650px) {
+  .success-content {
+    width: calc(100% - 28px);
+  }
+
+  .success-header {
+    min-height: 73px;
+  }
+
+  .success-message {
+    padding: 38px 8px 32px;
+  }
+
+  .success-check {
+    width: 72px;
+    height: 72px;
+  }
+
+  .success-check svg {
+    width: 43px;
+    height: 43px;
+  }
+
+  .success-message p {
+    font-size: .9rem;
+  }
+
+  .success-ticket-heading {
+    margin-bottom: 19px;
+  }
+
+  .success-ticket-heading p {
+    font-size: .82rem;
+  }
+
+  .success-footer {
+    margin-top: 28px;
+    font-size: 8px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .success-content,
+  .success-check {
+    animation: none;
+  }
+}
+
+
 </style>
 <link rel="icon" type="image/svg+xml" href="/favicon.svg">
 </head>
@@ -2020,117 +2300,163 @@ footer .wrap {
   </div>
 </section>
 </main>
-<!-- نافذة التذكرة الرقمية -->
+
+<!-- شاشة نجاح التسجيل -->
 <div class="ticket-modal" id="ticketModal" aria-hidden="true">
   <div class="ticket-backdrop"></div>
 
-  <div class="ticket-modal-content">
+  <div class="success-content">
 
-    <div class="ticket-actions">
-      <p>تم تأكيد تسجيلك! هذه تذكرتك الخاصة.</p>
-
-      <div class="ticket-actions-buttons">
-        <button class="ticket-action-btn primary" id="downloadTicket" type="button">
-          تحميل التذكرة ↓
-        </button>
-
-        <button class="ticket-action-btn" id="closeTicket" type="button">
-          إغلاق ×
-        </button>
+    <!-- الشعار -->
+    <header class="success-header">
+      <div class="success-brand">
+        <span class="success-brand-mark">م</span>
+        <strong>مدارِّك</strong>
       </div>
-    </div>
+    </header>
 
-    <div class="ticket-card" id="ticketCard">
+    <div class="success-divider"></div>
 
-      <div class="ticket-topline"></div>
+    <!-- رسالة النجاح -->
+    <section class="success-message">
 
-      <div class="ticket-header">
-        <div class="ticket-brand">
-          <div class="ticket-brand-mark">م</div>
-          <div>
-            <div class="ticket-brand-name">مدارِّك</div>
-            <div class="ticket-brand-tagline">معرفة تتجاوز المألوف</div>
-          </div>
-        </div>
-
-        <div class="ticket-header-side">
-          <strong>ENTRY PASS</strong>
-          2026 · JEDDAH
-        </div>
-      </div>
-
-      <div class="ticket-top-divider"></div>
-
-      <div class="ticket-hero">
-        <div>
-          <div class="ticket-kicker">MADAREK COMMUNITY</div>
-          <h2>أنت الآن جزء من مدارك.</h2>
-          <p>تم اعتماد تسجيلك، ومقعدك بانتظارك.</p>
-        </div>
-
-        <svg class="ticket-atom" viewBox="0 0 200 170" aria-label="رسم ذرة">
-          <ellipse cx="100" cy="85" rx="83" ry="30" transform="rotate(32 100 85)"/>
-          <ellipse cx="100" cy="85" rx="83" ry="30" transform="rotate(-32 100 85)"/>
-          <ellipse cx="100" cy="85" rx="83" ry="30" transform="rotate(90 100 85)"/>
-          <circle cx="100" cy="85" r="9"/>
-          <circle cx="31" cy="49" r="5"/>
-          <circle cx="169" cy="121" r="5"/>
+      <div class="success-check">
+        <svg viewBox="0 0 48 48" aria-hidden="true">
+          <path d="M13 25 L21 33 L36 16"/>
         </svg>
       </div>
 
-      <div class="ticket-main">
+      <h1 id="successTitle">نراك قريبًا!</h1>
 
-        <div class="ticket-details">
+      <p id="successDescription">
+        تم تأكيد تسجيلك بنجاح. شكرًا لاختيارك مدارك.
+      </p>
 
-          <div>
-            <span class="ticket-detail-label">اللقاء</span>
-            <strong class="ticket-detail-value ticket-event-name" id="ticketEventName">الكيمياء</strong>
-            <span class="ticket-detail-label">كل شيء تحتاج تعرفه عن...</span>
+    </section>
+
+    <!-- التذكرة -->
+    <section class="success-ticket-section">
+
+      <div class="success-ticket-heading">
+        <div class="success-ticket-kicker">YOUR ENTRY PASS</div>
+        <h2>تذكرتك جاهزة.</h2>
+        <p>التذكرة الإلكترونية المعتمدة أصبحت جاهزة للاحتفاظ بها.</p>
+      </div>
+
+      <!-- تصميم التذكرة الأصلي، بدون تغيير -->
+      <div class="ticket-card" id="ticketCard">
+
+        <div class="ticket-topline"></div>
+
+        <div class="ticket-header">
+          <div class="ticket-brand">
+            <div class="ticket-brand-mark">م</div>
+            <div>
+              <div class="ticket-brand-name">مدارِّك</div>
+              <div class="ticket-brand-tagline">معرفة تتجاوز المألوف</div>
+            </div>
           </div>
 
+          <div class="ticket-header-side">
+            <strong>ENTRY PASS</strong>
+            2026 · JEDDAH
+          </div>
+        </div>
+
+        <div class="ticket-top-divider"></div>
+
+        <div class="ticket-hero">
           <div>
-            <span class="ticket-detail-label">اسم صاحب التذكرة</span>
-            <strong class="ticket-detail-value" id="ticketStudentName">—</strong>
+            <div class="ticket-kicker">MADAREK COMMUNITY</div>
+            <h2>أنت الآن جزء من مدارك.</h2>
+            <p>تم اعتماد تسجيلك، ومقعدك بانتظارك.</p>
           </div>
 
-          <div>
-            <span class="ticket-detail-label">الصف والفصل</span>
-            <strong class="ticket-detail-value" id="ticketClass">—</strong>
+          <svg class="ticket-atom" viewBox="0 0 200 170" aria-label="رسم ذرة">
+            <ellipse cx="100" cy="85" rx="83" ry="30" transform="rotate(32 100 85)"/>
+            <ellipse cx="100" cy="85" rx="83" ry="30" transform="rotate(-32 100 85)"/>
+            <ellipse cx="100" cy="85" rx="83" ry="30" transform="rotate(90 100 85)"/>
+            <circle cx="100" cy="85" r="9"/>
+            <circle cx="31" cy="49" r="5"/>
+            <circle cx="169" cy="121" r="5"/>
+          </svg>
+        </div>
+
+        <div class="ticket-main">
+
+          <div class="ticket-details">
+
+            <div>
+              <span class="ticket-detail-label">اللقاء</span>
+              <strong class="ticket-detail-value ticket-event-name" id="ticketEventName">الكيمياء</strong>
+              <span class="ticket-detail-label">كل شيء تحتاج تعرفه عن...</span>
+            </div>
+
+            <div>
+              <span class="ticket-detail-label">اسم صاحب التذكرة</span>
+              <strong class="ticket-detail-value" id="ticketStudentName">—</strong>
+            </div>
+
+            <div>
+              <span class="ticket-detail-label">الصف والفصل</span>
+              <strong class="ticket-detail-value" id="ticketClass">—</strong>
+            </div>
+
+            <div>
+              <span class="ticket-detail-label">حالة التسجيل</span>
+              <span class="ticket-status">تذكرة معتمدة</span>
+            </div>
+
           </div>
 
-          <div>
-            <span class="ticket-detail-label">حالة التسجيل</span>
-            <span class="ticket-status">تذكرة معتمدة</span>
+          <div class="ticket-seat">
+            <small>مقعدك</small>
+            <strong id="ticketSeat">A2</strong>
+          </div>
+
+          <div class="ticket-qr-area">
+            <div class="ticket-qr-box" id="ticketQr"></div>
+            <div class="ticket-code" id="ticketCode">MDK-0001</div>
           </div>
 
         </div>
 
-        <div class="ticket-seat">
-          <small>مقعدك</small>
-          <strong id="ticketSeat">A2</strong>
-        </div>
+        <div class="ticket-footer">
+          <div class="ticket-footer-divider">
+            <span class="ticket-footer-dots">
+              <i></i><i></i><i></i>
+            </span>
+          </div>
 
-        <div class="ticket-qr-area">
-          <div class="ticket-qr-box" id="ticketQr"></div>
-          <div class="ticket-code" id="ticketCode">MDK-0001</div>
+          <strong>أنت من صُنّاع تجربة مدارك.</strong>
+          <small>MADAREK · KNOWLEDGE BEYOND THE ORDINARY</small>
         </div>
 
       </div>
 
-      <div class="ticket-footer">
-        <div class="ticket-footer-divider">
-          <span class="ticket-footer-dots">
-            <i></i><i></i><i></i>
-          </span>
-        </div>
+      <!-- أزرار الشاشة -->
+      <div class="success-actions">
 
-        <strong>أنت من صُنّاع تجربة مدارك.</strong>
-        <small>MADAREK · KNOWLEDGE BEYOND THE ORDINARY</small>
+        <button class="success-download-btn" id="downloadTicket" type="button">
+          تحميل التذكرة
+          <span>↓</span>
+        </button>
+
+        <button class="success-return-btn" id="closeTicket" type="button">
+          العودة إلى مدارك
+        </button>
+
       </div>
 
+    </section>
+
+    <div class="success-footer">
+      MADAREK · KNOWLEDGE BEYOND THE ORDINARY
     </div>
+
   </div>
 </div>
+
 <footer>
   <div class="wrap">
     <span>© مدارك — MADAREK</span>
@@ -2243,11 +2569,13 @@ updateRegistrationDisplay(result.registration);
 
 const ticketModal = document.getElementById("ticketModal");
 
+
 function showTicket(ticket) {
   if (!ticket || !ticket.ticketId) {
     throw new Error("بيانات التذكرة غير مكتملة.");
   }
 
+  // بيانات التذكرة
   document.getElementById("ticketStudentName").textContent =
     ticket.fullName || "—";
 
@@ -2263,6 +2591,40 @@ function showTicket(ticket) {
   document.getElementById("ticketEventName").textContent =
     ticket.eventName || "الكيمياء";
 
+  // رسائل النجاح العشوائية
+  const successMessages = [
+    {
+      title: "نراك قريبًا!",
+      description: "تم تأكيد تسجيلك بنجاح. شكرًا لاختيارك مدارك."
+    },
+    {
+      title: "موعدنا في اللقاء!",
+      description: "تذكرتك أصبحت جاهزة، ونتطلع إلى لقائك."
+    },
+    {
+      title: "أهلًا بك في مدارك.",
+      description: "سعداء بانضمامك إلينا. ننتظرك في رحلتنا القادمة."
+    },
+    {
+      title: "شكرًا لانضمامك إلينا.",
+      description: "تم تسجيلك بنجاح، ونأمل أن تكون تجربة ممتعة ومثرية."
+    },
+    {
+      title: "لقاء معرفي جديد ينتظرك!",
+      description: "احتفظ بتذكرتك واستعد لاكتشاف أشياء جديدة."
+    }
+  ];
+
+  const selectedMessage =
+    successMessages[Math.floor(Math.random() * successMessages.length)];
+
+  document.getElementById("successTitle").textContent =
+    selectedMessage.title;
+
+  document.getElementById("successDescription").textContent =
+    selectedMessage.description;
+
+  // إنشاء QR الحقيقي
   const qrContainer = document.getElementById("ticketQr");
   qrContainer.innerHTML = "";
 
@@ -2275,10 +2637,15 @@ function showTicket(ticket) {
     correctLevel: QRCode.CorrectLevel.H
   });
 
+  // فتح شاشة النجاح
   ticketModal.classList.add("is-open");
   ticketModal.setAttribute("aria-hidden", "false");
+
+  window.scrollTo(0, 0);
+
   document.body.style.overflow = "hidden";
 }
+
 
 function hideTicket() {
   ticketModal.classList.remove("is-open");
@@ -2323,7 +2690,7 @@ document.getElementById("downloadTicket").addEventListener("click", async functi
     alert("تعذر تحميل التذكرة. يمكنك أخذ لقطة شاشة لها.");
   } finally {
     button.disabled = false;
-    button.textContent = "تحميل التذكرة ↓";
+    button.textContent = "تحميل التذكرة";
   }
 });
 
