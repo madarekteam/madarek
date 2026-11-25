@@ -1987,6 +1987,81 @@ footer .wrap {
   }
 }
 
+/* Registration confirmation screen */
+.confirmation-content {
+  position: relative;
+  z-index: 2;
+  width: min(900px, calc(100% - 48px));
+  min-height: 100vh;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+}
+
+.confirmation-divider {
+  border-bottom: 1px solid rgba(23, 25, 28, .12);
+}
+
+.confirmation-message {
+  flex: 1;
+  min-height: 65vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: 50px 15px;
+}
+
+.confirmation-message h1 {
+  margin: 25px 0 12px;
+  font-size: clamp(28px, 5vw, 42px);
+}
+
+.confirmation-message p {
+  max-width: 460px;
+  line-height: 1.9;
+  color: #686868;
+  margin: 0 0 30px;
+}
+
+.confirmation-button {
+  border: 0;
+  background: #174de8;
+  color: white;
+  padding: 17px 35px;
+  font-family: inherit;
+  font-size: 16px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 22px;
+  transition: background .2s ease;
+}
+
+.confirmation-button:hover {
+  background: #103bc0;
+}
+
+.confirmation-button span {
+  font-size: 20px;
+}
+
+.confirmation-content .success-footer {
+  margin-top: auto;
+  padding: 25px 0;
+  text-align: center;
+}
+
+/* Hide the ticket screen until confirmation */
+.success-content {
+  display: none;
+}
+
+.success-content.is-visible {
+  display: block;
+}
 
 </style>
 <link rel="icon" type="image/svg+xml" href="/favicon.svg">
@@ -2304,7 +2379,34 @@ footer .wrap {
 <!-- شاشة نجاح التسجيل -->
 <div class="ticket-modal" id="ticketModal" aria-hidden="true">
   <div class="ticket-backdrop"></div>
+<div class="confirmation-content" id="confirmationContent">
+  <div class="success-brand">
+    <span class="success-brand-mark">م</span>
+    <strong>مدارِّك</strong>
+  </div>
 
+  <div class="confirmation-divider"></div>
+
+  <section class="confirmation-message">
+    <div class="success-check">
+      <svg viewBox="0 0 48 48" aria-hidden="true">
+        <path d="M13 25 L21 33 L36 16"/>
+      </svg>
+    </div>
+
+    <h1>تم استلام بياناتك!</h1>
+    <p>بقيت خطوة واحدة فقط. اضغط أدناه لتأكيد تسجيلك وإصدار تذكرتك.</p>
+
+    <button class="confirmation-button" id="confirmRegistration" type="button">
+      تأكيد التسجيل
+      <span>←</span>
+    </button>
+  </section>
+
+  <div class="success-footer">
+    MADAREK · KNOWLEDGE BEYOND THE ORDINARY
+  </div>
+</div>
   <div class="success-content">
 
     <!-- الشعار -->
@@ -2637,15 +2739,34 @@ function showTicket(ticket) {
     correctLevel: QRCode.CorrectLevel.H
   });
 
-  // فتح شاشة النجاح
+  // تجهيز شاشة التأكيد والتذكرة
+  const confirmationContent =
+    document.getElementById("confirmationContent");
+
+  const successContent =
+    document.querySelector(".success-content");
+
+  const confirmButton =
+    document.getElementById("confirmRegistration");
+
+  confirmationContent.style.display = "flex";
+  successContent.classList.remove("is-visible");
+
+  // عند الضغط على تأكيد التسجيل تظهر التذكرة
+  confirmButton.onclick = function () {
+    confirmationContent.style.display = "none";
+    successContent.classList.add("is-visible");
+
+    window.scrollTo(0, 0);
+  };
+
+  // فتح النافذة على شاشة التأكيد أولًا
   ticketModal.classList.add("is-open");
   ticketModal.setAttribute("aria-hidden", "false");
 
   window.scrollTo(0, 0);
-
   document.body.style.overflow = "hidden";
 }
-
 
 function hideTicket() {
   ticketModal.classList.remove("is-open");
