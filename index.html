@@ -536,7 +536,16 @@ function showTicket(t){
   s('#ticketEventName',t.eventName||'الكيمياء');
   const m=MSG[Math.floor(Math.random()*MSG.length)];s('#successTitle',m[0]);s('#successDescription',m[1]);
   const q=$('#ticketQr');q.innerHTML='';
-  new QRCode(q,{text:String(t.ticketId),width:112,height:112,colorDark:'#17191c',colorLight:'#ffffff',correctLevel:QRCode.CorrectLevel.H});
+ const ticketUrl = `https://madarek-check-in.pages.dev/?ticket=${encodeURIComponent(t.ticketId)}`;
+
+new QRCode(q,{
+  text:ticketUrl,
+  width:112,
+  height:112,
+  colorDark:'#17191c',
+  colorLight:'#ffffff',
+  correctLevel:QRCode.CorrectLevel.H
+});
   const d=$('#ticketModal');d.classList.remove('done');d.scrollTop=0;openD(d);
 }
 $('#confirmRegistration').onclick=()=>{const d=$('#ticketModal');d.classList.add('done');d.scrollTop=0};
