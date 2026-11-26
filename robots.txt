@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://madarek-alg.pages.dev/sitemap.xml
