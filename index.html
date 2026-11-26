@@ -16,7 +16,7 @@
 <style>
 :root{--paper:#f3f0e8;--ink:#17191c;--blue:#174de8;--blue2:#2c61f4;--sky:#7d9bff;--muted:#65676a;--line:#d7d3ca;--white:#fffdf8;--ease:cubic-bezier(.2,.8,.2,1)}
 *{box-sizing:border-box}
-html{scroll-behavior:smooth;-webkit-text-size-adjust:100%}
+html{overflow-x:hidden;scroll-behavior:smooth;-webkit-text-size-adjust:100%}
 body{margin:0;background:var(--paper);color:var(--ink);font:400 1.0625rem/1.8 'IBM Plex Sans Arabic',Tahoma,sans-serif;overflow-x:hidden}
 body.lock,body.m{overflow:hidden}
 a{color:inherit;text-decoration:none}
@@ -35,8 +35,8 @@ section{scroll-margin-top:90px}
 /* nav */
 .nav{position:fixed;z-index:50;top:max(12px,env(safe-area-inset-top));inset-inline:12px;margin-inline:auto;max-width:1000px;display:flex;align-items:center;justify-content:space-between;gap:16px;padding:8px;border-radius:999px;background:rgba(243,240,232,.78);backdrop-filter:blur(18px) saturate(1.4);-webkit-backdrop-filter:blur(18px) saturate(1.4);border:1px solid rgba(23,25,28,.08);transition:box-shadow .3s}
 .nav.s{box-shadow:0 10px 40px rgba(23,25,28,.14)}
-.logo{position:relative;z-index:2;display:flex;align-items:center;gap:10px;font-weight:700;font-size:1.2rem;padding-inline-start:6px}
-.logo b{display:grid;place-items:center;width:38px;height:38px;border-radius:50%;background:var(--blue);color:var(--paper)}
+.logo{position:relative;z-index:2;display:flex;align-items:center;gap:10px;font-weight:700;font-size:1.2rem;padding-inline-start:12px}
+.logo b{display:grid;place-items:center;width:40px;height:40px;background:var(--blue);color:#fff;font-size:1.4rem}
 #menu{display:flex;gap:4px}
 #menu a{padding:8px 16px;border-radius:999px;font-weight:500;transition:background .2s}
 #menu a:hover{background:rgba(23,25,28,.07)}
@@ -53,11 +53,11 @@ body.m .burger i:nth-child(2){transform:translateY(-3.5px) rotate(-45deg)}
 /* hero */
 .hero{min-height:100vh;min-height:100svh;display:grid;align-items:center;padding:110px 0 50px;overflow:hidden}
 .hero .wrap{display:grid;grid-template-columns:1.1fr .9fr;gap:20px;align-items:center}
-.kicker{display:flex;align-items:center;gap:10px;font-weight:600;color:var(--blue);margin-bottom:14px}
+.kicker{display:flex;align-items:center;gap:10px;font-weight:600;color:var(--blue);margin-bottom:32px}
 .kicker:before{content:"";width:10px;height:10px;border-radius:50%;background:var(--blue);animation:pulse 2s infinite}
 @keyframes pulse{50%{transform:scale(1.8);opacity:.35}}
 h1{font-size:clamp(5rem,17vw,13.5rem);line-height:.95}
-.ln{display:block;overflow:hidden;padding:.2em 0 .15em;margin:-.1em 0}
+.ln{display:block;overflow:hidden;padding:.2em 0 .15em}
 .ln>span{display:block;animation:rise 1.1s var(--ease) both}
 .ln:nth-child(2)>span{animation-delay:.14s}
 @keyframes rise{from{transform:translateY(115%)}}
@@ -65,17 +65,21 @@ h1{font-size:clamp(5rem,17vw,13.5rem);line-height:.95}
 .cta{display:flex;flex-wrap:wrap;gap:12px;animation:fade 1s .65s both}
 @keyframes fade{from{opacity:0;transform:translateY(14px)}}
 .stage{position:relative;height:min(62vh,520px)}
-.f{position:absolute;transform:translate3d(calc(var(--mx,0)*var(--d)*1px),calc(var(--my,0)*var(--d)*1px),0) rotate(var(--r));transition:transform .35s ease-out;animation:pop 1s .7s var(--ease) both}
+.f{position:absolute;transform:translate3d(calc(var(--mx,0)*var(--d)*1px),calc(var(--my,0)*var(--d)*1px),0) rotate(var(--r));transition:transform .35s ease-out;animation:pop .8s .25s var(--ease) both}
 .f b{display:grid;place-items:center;width:100%;height:100%;border-radius:inherit;font-weight:700;animation:fl 5s ease-in-out infinite alternate}
 @keyframes fl{to{transform:translateY(-14px)}}
 @keyframes pop{from{opacity:0;scale:.6}}
-.f1{--d:30;--r:-7deg;width:52%;aspect-ratio:1/1.1;top:2%;left:8%;border-radius:14%}
-.f1 b{background:var(--blue);color:var(--paper);font-size:clamp(2.4rem,6vw,4.8rem)}
-.f2{--d:55;--r:12deg;width:34%;aspect-ratio:1;top:42%;right:2%;border-radius:50%;animation-delay:.85s}
-.f2 b{background:var(--ink);color:var(--paper);font-size:clamp(2.6rem,7vw,5rem);animation-delay:-2s;animation-duration:6.5s}
-.f3{--d:22;--r:5deg;width:50%;aspect-ratio:1.5;bottom:2%;left:16%;border-radius:20%;animation-delay:1s}
-.f3 b{background:var(--white);color:var(--blue);border:1.5px solid var(--line);font-size:clamp(2rem,5vw,3.8rem);animation-delay:-4s}
 
+.f1{--d:30;--r:-5deg;width:76%;aspect-ratio:1;top:4%;left:4%;border-radius:12%}
+.f1 b{background:var(--blue);color:var(--paper)}
+.atom{width:88%;height:88%;overflow:visible}
+.f2{--d:55;--r:10deg;width:30%;aspect-ratio:1;top:26%;right:0;border-radius:50%;animation-delay:.4s}
+.f2 b{background:var(--ink);color:var(--paper)}
+.tre{width:60%;height:60%;animation:spin 30s linear infinite}
+@keyframes spin{to{transform:rotate(360deg)}}
+.f3{--d:30;--r:6deg;width:42%;aspect-ratio:1.5;bottom:2%;left:14%;border-radius:22%;animation-delay:.3s}
+.f3 b{background:var(--white);color:var(--blue);border:1.5px solid var(--line);font-size:clamp(1.6rem,3.4vw,2.7rem);animation-delay:-3s}
+.f3 span{direction:ltr}.f3 sub{font-size:.55em;vertical-align:-.1em}
 .mq{background:var(--blue);color:var(--paper);overflow:hidden;direction:ltr;padding:16px 0;transform:rotate(-1.2deg);margin:16px -12px}
 .mq div{display:flex;width:max-content;animation:mq 40s linear infinite reverse}
 .mq span{font-weight:700;font-size:clamp(1.6rem,4vw,2.8rem);padding-inline:.5em;white-space:nowrap}
@@ -195,9 +199,28 @@ dialog[open]{animation:pop2 .45s var(--ease)}
 .ticket-footer small{display: block; direction: ltr; font-family: Arial, sans-serif; color: #777873; font-size: 8px; letter-spacing: 1.5px; margin-top: 5px;}
 @media (max-width: 650px){.ticket-header{padding: 17px 17px 14px;}.ticket-top-divider{margin-inline: 17px;}.ticket-hero{grid-template-columns: 1fr 95px; padding: 20px 17px; gap: 8px;}.ticket-atom{width: 95px;}.ticket-main{grid-template-columns: 1fr 105px; gap: 12px; padding: 17px;}.ticket-details{gap: 15px 10px;}.ticket-detail-value{font-size: 13px;}.ticket-event-name{font-size: 18px;}.ticket-seat strong{font-size: 30px;}.ticket-qr-area{padding-right: 10px;}.ticket-qr-box{width: 85px; height: 85px;}.ticket-code{font-size: 10px;}.ticket-footer{padding: 14px 17px;}}
 @media (max-width: 380px){.ticket-header-side{font-size: 9px;}.ticket-brand-name{font-size: 18px;}.ticket-hero h2{font-size: 22px;}.ticket-main{grid-template-columns: 1fr 90px;}}
-#ticketModal{width:min(800px,96vw);background:var(--white)}
+.ticket-main{grid-template-columns: minmax(0, 1fr) 155px 145px; gap: 20px; align-items: stretch;}
+.ticket-details{grid-column: 1; min-width: 0; grid-template-columns: 1fr 1fr; gap: 20px 25px;}
+.ticket-details > div{min-width: 0;}
+.ticket-detail-value{overflow-wrap: anywhere;}
+.ticket-seat{grid-column: 2; grid-row: 1; min-height: 125px; width: 100%; max-width: 155px; justify-self: center; align-self: center;}
+.ticket-seat small{font-size: 13px;}
+.ticket-seat strong{font-size: 46px;}
+.ticket-qr-area{grid-column: 3; grid-row: 1; padding-right: 15px; justify-content: center; align-self: stretch;}
+.ticket-qr-box{width: 125px; height: 125px; padding: 6px;}
+.ticket-qr-box img,
+.ticket-qr-box canvas{width: 112px !important; height: 112px !important;}
+.ticket-status{font-size: 13px; padding: 7px 15px; margin-top: 9px; border-radius: 25px;}
+.ticket-event-name{font-size: 27px;}
+.ticket-event-name + .ticket-detail-label{font-size: 13px; margin-top: 4px;}
+@media (max-width: 650px){.ticket-main{grid-template-columns: minmax(0, 1fr) 105px 95px; gap: 8px; padding: 17px 10px;}.ticket-details{gap: 15px 8px;}.ticket-detail-value{font-size: 12px;}.ticket-event-name{font-size: 19px;}.ticket-seat{min-height: 100px;}.ticket-seat strong{font-size: 32px;}.ticket-qr-area{padding-right: 6px;}.ticket-qr-box{width: 85px; height: 85px;}.ticket-qr-box img,
+  .ticket-qr-box canvas{width: 75px !important; height: 75px !important;}.ticket-status{font-size: 10px; padding: 5px 8px;}}
+#ticketModal{width:min(1040px,96vw);background:var(--white)}
 #ticketModal .in{padding-inline:clamp(12px,3vw,32px)}
 #step2 h3,#step2 #successDescription{padding-inline:6px}
+#step1{text-align:center;padding:clamp(24px,5vw,56px) 0}
+#step1 h3{font-size:clamp(2.2rem,5vw,3.6rem)}
+#step1 p{margin-inline:auto;max-width:34ch}
 .acts{display:flex;flex-wrap:wrap;gap:10px}.acts .btn{flex:1}
 
 @media(max-width:800px){
@@ -208,7 +231,7 @@ body.m #menu{opacity:1;visibility:visible}
 #menu a{font-size:clamp(2.4rem,11vw,3.6rem);font-weight:700;padding:6px 0;border-radius:0}
 #menu a:hover{background:none;color:var(--sky)}
 .hero .wrap,.cards,.eg,.panels{grid-template-columns:1fr}
-.stage{height:290px}.card{min-height:380px}.eg{gap:24px}
+.stage{height:auto;margin-top:52px;padding-bottom:36px}.f1{position:relative;inset:auto;width:min(74vw,300px);margin-inline:auto}.f2{display:none}.f3{width:36%;left:auto;right:5%;bottom:0}.card{min-height:380px}.eg{gap:24px}
 .event{border-radius:32px}.panel{border-radius:28px}
 }
 @supports(animation-timeline:view()){
@@ -234,7 +257,7 @@ body.m #menu{opacity:1;visibility:visible}
       <p class="lead">مدارك مساحة نلتقي فيها حول الأسئلة الكبيرة والأفكار الصغيرة، ونكتشف المعرفة خارج حدود المألوف.</p>
       <div class="cta"><a class="btn b-blue" href="#event">اكتشف اللقاء القادم</a><a class="btn b-line" href="#about">ما هي مدارك؟</a></div>
     </div>
-    <div class="stage" aria-hidden="true"><div class="f f1"><b>ليش؟</b></div><div class="f f2"><b>✳</b></div><div class="f f3"><b>كيف؟</b></div></div>
+    <div class="stage" aria-hidden="true"><div class="f f1"><b><svg class="atom" viewBox="0 0 400 400"><g fill="none" stroke="currentColor" stroke-width="2.6"><g transform="rotate(0 200 200)"><ellipse cx="200" cy="200" rx="165" ry="60"/><circle r="9" fill="currentColor" stroke="none"><animateMotion dur="5s" begin="0s" repeatCount="indefinite" path="M365 200A165 60 0 1 1 35 200A165 60 0 1 1 365 200Z"/></circle></g><g transform="rotate(60 200 200)"><ellipse cx="200" cy="200" rx="165" ry="60"/><circle r="9" fill="currentColor" stroke="none"><animateMotion dur="7s" begin="-2s" repeatCount="indefinite" path="M365 200A165 60 0 1 1 35 200A165 60 0 1 1 365 200Z"/></circle></g><g transform="rotate(120 200 200)"><ellipse cx="200" cy="200" rx="165" ry="60"/><circle r="9" fill="currentColor" stroke="none"><animateMotion dur="6s" begin="-4s" repeatCount="indefinite" path="M365 200A165 60 0 1 1 35 200A165 60 0 1 1 365 200Z"/></circle></g></g><circle cx="200" cy="200" r="16" fill="currentColor"><animate attributeName="r" values="16;19;16" dur="2.4s" repeatCount="indefinite"/></circle></svg></b></div><div class="f f2"><b><svg class="tre" viewBox="0 0 100 100" fill="currentColor"><path d="M71.0 86.4A42 42 0 0 1 29.0 86.4L42.5 63.0A15 15 0 0 0 57.5 63.0Z"/><path d="M8.0 50.0A42 42 0 0 1 29.0 13.6L42.5 37.0A15 15 0 0 0 35.0 50.0Z"/><path d="M71.0 13.6A42 42 0 0 1 92.0 50.0L65.0 50.0A15 15 0 0 0 57.5 37.0Z"/><circle cx="50" cy="50" r="7"/></svg></b></div><div class="f f3"><b><span>H<sub>2</sub>O</span></b></div></div>
   </div>
 </section>
 
@@ -416,6 +439,7 @@ const $=s=>document.querySelector(s),$$=s=>[...document.querySelectorAll(s)];
 const esc=s=>String(s==null?'':s).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
 const still=matchMedia('(prefers-reduced-motion:reduce)').matches,hov=matchMedia('(hover:hover)').matches;
 const errMsg=(x,d)=>/[\u0600-\u06FF]/.test(x&&x.message)?x.message:d;
+if(still)$$('.atom').forEach(s=>s.pauseAnimations&&s.pauseAnimations());
 
 /* الاتصال بخادم Cloudflare */
 async function api(action,payload={}){
