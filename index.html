@@ -262,6 +262,36 @@ dialog[open]{animation:pop2 .45s var(--ease)}
 .ticket-event-name + .ticket-detail-label{font-size: 13px; margin-top: 4px;}
 @media (max-width: 650px){.ticket-main{grid-template-columns: minmax(0, 1fr) 105px 95px; gap: 8px; padding: 17px 10px;}.ticket-details{gap: 15px 8px;}.ticket-detail-value{font-size: 12px;}.ticket-event-name{font-size: 19px;}.ticket-seat{min-height: 100px;}.ticket-seat strong{font-size: 32px;}.ticket-qr-area{padding-right: 6px;}.ticket-qr-box{width: 85px; height: 85px;}.ticket-qr-box img,
   .ticket-qr-box canvas{width: 75px !important; height: 75px !important;}.ticket-status{font-size: 10px; padding: 5px 8px;}}
+/* تذكرة الجوال: التفاصيل بعرض كامل، ثم المقعد والـ QR جنبًا إلى جنب (نفس تصميم الكمبيوتر) */
+@media (max-width: 650px){
+.ticket-main{grid-template-columns: 1fr 1fr; gap: 18px 14px; padding: 20px 16px 22px;}
+.ticket-details{grid-column: 1 / -1; grid-row: 1; gap: 18px 14px;}
+.ticket-detail-label{font-size: 11px;}
+.ticket-detail-value{font-size: 15px;}
+.ticket-event-name{font-size: 24px;}
+.ticket-seat{grid-column: 1; grid-row: 2; width: 100%; max-width: none; min-height: 140px; justify-self: stretch; align-self: stretch;}
+.ticket-seat small{font-size: 13px;}
+.ticket-seat strong{font-size: 46px;}
+.ticket-qr-area{grid-column: 2; grid-row: 2; padding-right: 14px; border-right: 1px solid #d7d3ca;}
+.ticket-qr-box{width: 122px; height: 122px;}
+.ticket-qr-box img,
+.ticket-qr-box canvas{width: 110px !important; height: 110px !important;}
+.ticket-status{font-size: 12px; padding: 6px 13px;}
+.ticket-code{font-size: 11px;}
+#ticketModal{width: 98vw; border-radius: 26px;}
+#ticketModal .in{padding: 60px 8px 18px;}
+#step2 h3{font-size: 1.7rem;}
+.acts{flex-direction: column;}.acts .btn{flex: none; width: 100%;}
+}
+@media (max-width: 380px){
+.ticket-main{padding: 18px 12px 20px; gap: 16px 10px;}
+.ticket-header{gap: 8px; padding-inline: 14px;}.ticket-header-side{letter-spacing: .6px; white-space: nowrap;}
+.ticket-qr-area{padding-right: 8px;}
+.ticket-qr-box{width: 104px; height: 104px;}
+.ticket-qr-box img,
+.ticket-qr-box canvas{width: 92px !important; height: 92px !important;}
+.ticket-seat strong{font-size: 40px;}
+}
 #ticketModal{width:min(1040px,96vw);background:var(--white)}
 #ticketModal .in{padding-inline:clamp(12px,3vw,32px)}
 #step2 h3,#step2 #successDescription{padding-inline:6px}
